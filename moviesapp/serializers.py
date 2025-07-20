@@ -6,7 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'name']
         extra_kwargs = {
-            'name': {'validators': []}  # تعطيل فحص التكرار
+            'name': {'validators': []}  
         }
 
 class CastSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class CastSerializer(serializers.ModelSerializer):
         model = Cast
         fields = ['id', 'name']
         extra_kwargs = {
-            'name': {'validators': []}  # تعطيل فحص التكرار
+            'name': {'validators': []}  
         }
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -57,14 +57,14 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
     def update(self, instance, validated_data):
-        # تحديث الحقول العادية أولاً
+        
         instance.title = validated_data.get('title', instance.title)
         instance.description = validated_data.get('description', instance.description)
         instance.release_date = validated_data.get('release_date', instance.release_date)
         instance.poster_image = validated_data.get('poster_image', instance.poster_image)
         instance.save()
 
-        # معالجة الفئات
+        
         if 'categories' in validated_data:
             categories = []
             for cat_data in validated_data['categories']:
@@ -80,7 +80,7 @@ class MovieSerializer(serializers.ModelSerializer):
                     continue
             instance.categories.set(categories)
 
-        # معالجة الممثلين
+        
         if 'casts' in validated_data:
             casts = []
             for cast_data in validated_data['casts']:
@@ -139,14 +139,14 @@ class SeriesSerializer(serializers.ModelSerializer):
 
     
     def update(self, instance, validated_data):
-        # تحديث الحقول العادية أولاً
+        
         instance.title = validated_data.get('title', instance.title)
         instance.description = validated_data.get('description', instance.description)
         instance.release_date = validated_data.get('release_date', instance.release_date)
         instance.poster_image = validated_data.get('poster_image', instance.poster_image)
         instance.save()
 
-        # معالجة الفئات
+        
         if 'categories' in validated_data:
             categories = []
             for cat_data in validated_data['categories']:
@@ -162,7 +162,7 @@ class SeriesSerializer(serializers.ModelSerializer):
                     continue
             instance.categories.set(categories)
 
-        # معالجة الممثلين
+        
         if 'casts' in validated_data:
             casts = []
             for cast_data in validated_data['casts']:
